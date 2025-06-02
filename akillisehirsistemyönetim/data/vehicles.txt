@@ -1,0 +1,2 @@
+id,type,licensePlate,status
+1,aslan,27AAC19,Aktif

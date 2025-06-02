@@ -1,0 +1,4 @@
+id,type,description,date
+1,elektrik,tükenmek üzere,2025-01-03
+2,Su Seviyesi Raporu,Su seviyesi normal seviyede,2025-01-15
+3,Su Seviyesi Raporu,Su seviyesi normal seviyede,2025-01-15

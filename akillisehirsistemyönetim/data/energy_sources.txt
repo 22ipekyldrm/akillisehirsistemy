@@ -1,0 +1,2 @@
+id,type,capacity,currentOutput
+1,su,120.0,67.0

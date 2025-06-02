@@ -1,0 +1,2 @@
+id,type,floors,energyEfficiency
+1,akıllı,14,28.0
