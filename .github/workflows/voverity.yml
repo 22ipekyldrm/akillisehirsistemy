@@ -1,0 +1,39 @@
+name: Java CI with Maven and Coverity
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_and_coverity:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Capture build with Coverity
+      run: |
+        cov-build --dir cov-int mvn clean package
+
+    - name: Analyze with Coverity
+      run: |
+        cov-analyze --dir cov-int
+
+    - name: Commit defects to Coverity server
+      env:
+        COVERITY_URL: ${{ secrets.COVERITY_URL }}
+        COVERITY_TOKEN: ${{ secrets.COVERITY_TOKEN }}
+        COVERITY_PROJECT_NAME: "proje-adi"
+        COVERITY_STREAM_NAME: "stream-adi"
+      run: |
+        cov-commit-defects --dir cov-int --host $COVERITY_URL --stream $COVERITY_STREAM_NAME --auth-token $COVERITY_TOKEN
